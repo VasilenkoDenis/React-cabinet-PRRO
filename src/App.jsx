@@ -5,6 +5,7 @@ import '@fontsource/roboto/700.css';
 import { useState } from 'react';
 import Stack from '@mui/material/Stack';
 import SignUpForm from './components/SignUpForm';
+import HomePage from './components/Home/HomePage';
 
 function App() {
 
@@ -14,7 +15,7 @@ function App() {
     <Stack sx={{direction:"column", alignItems: "center", justifyContent: "center", mt: 20}} /* выравнивание по центру и отступ сверху */> 
       {  
         user 
-        ? <div> {user.name} </div> 
+        ? <HomePage username={user.name} /> 
         : <SignUpForm setUser={setUser}/> 
       }
     </Stack>
