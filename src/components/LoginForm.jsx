@@ -7,11 +7,13 @@ import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import { useState } from 'react';
+import { useSnackbar } from 'notistack';
 
 function LoginForm(props) {
 
   const [data, setData] = useState('');
   const [pass, setPass] = useState('');
+  const {enqueueSnackbar} = useSnackbar();
 
   const handleChangeLogin = (event) => {
   
@@ -29,10 +31,11 @@ function LoginForm(props) {
     // Логіка входу
     if (data === 'admin' && pass === '123') {
         props.setUser({ name: 'Admin' });
+        enqueueSnackbar('Ласкаво просимо, ' + data + '!', { variant: 'success' });
       // Виконати логіку входу
     }
     else {
-        console.log('Unknown user or incorrect password');
+        enqueueSnackbar('Невірний логін або пароль', { variant: 'error' });
     }
 
   };
