@@ -25,6 +25,18 @@ function LoginForm(props) {
 
   }
 
+  const handleLoginClick = () => {
+    // Логіка входу
+    if (data === 'admin' && pass === '123') {
+        props.setUser({ name: 'Admin' });
+      // Виконати логіку входу
+    }
+    else {
+        console.log('Unknown user or incorrect password');
+    }
+
+  };
+
   return (
         <div style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
           <Typography variant="h3" gutterBottom>
@@ -38,7 +50,7 @@ function LoginForm(props) {
           <Stack spacing={2} sx={{ width: 350, gap: 2 }}   /* ширина 350px */>  
             <TextField id="login" label="Логін" variant="outlined" onChange={handleChangeLogin} value={data} />   
             <TextField id="password" label="Пароль" variant="outlined" type="password" onChange={handleChangePassword} value={pass} />
-            <Button variant="contained">
+            <Button onClick={handleLoginClick} variant="contained">
                Увійти до системи
             </Button>
             <Typography variant="subtitle1" gutterBottom>
