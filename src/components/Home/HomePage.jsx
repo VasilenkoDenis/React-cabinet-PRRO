@@ -1,42 +1,41 @@
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import { CheckBox } from '@mui/icons-material';
+import Button from '@mui/material/Button';
+import TodoItem from './TodoItem';
+import { useState } from 'react';
+
+const todo = {
+    _id: "asd123asdsa1234ads",
+    title: "Завдання 1",
+    description: "Опис завдання 1",
+    completed: false,
+    createdAt: "2023-06-01T12:00:00.000Z",
+    updatedAt: "2023-06-01T12:00:00.000Z"
+}
 
 function HomePage(props) {
 
-    const todo = {
+    const [todos, setTodos] = useState([todo]);
 
-        _id: "asd123asdsa1234ads",
-        title: "Завдання 1",
-        description: "Опис завдання 1",
-        completed: false,
-        createdAt: "2023-06-01T12:00:00.000Z",
-        updatedAt: "2023-06-01T12:00:00.000Z"
-    }
+    const handleAddTodo = () => {
+
+        const newTodo = {
+            _id: Date.now().toString(),
+            title: "Нове завдання",
+            description: "Опис нового завдання",
+            completed: false,
+            createdAt: new Date().toISOString(),
+            updatedAt: new Date().toISOString()
+        };
+        setTodos([newTodo, ...todos]);
+    };
 
     return (
         <div>
             <Typography>{props.username}</Typography>
-            <Card sx={{ minWidth: 275 }}>
-                <CardContent>
-                    <Typography gutterBottom>
-                        {todo.title}
-                    </Typography>
-                    <Typography variant="body2">
-                        {todo.description}
-                    </Typography>
-                </CardContent>
-                <CardActions>
-                    <CheckBox checked={todo.completed} />
-                    <Button size="small">Редагувати</Button>
-                    <Button size="small" sx={{ backgroundColor: "red", color: "white" }}>
-                        Видалити
-                    </Button>
-                </CardActions>
-            </Card>
+            <Button onClick={handleAddTodo}>Додати завдання</Button>
+            {todos.map((item) => {
+                return <TodoItem todo={item} key={item._id} />
+            })}
         </div>
     );
 }
