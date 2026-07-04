@@ -1,5 +1,6 @@
 import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
+
+import AddTodo from './AddTodo';
 import TodoItem from './TodoItem';
 import { useState } from 'react';
 
@@ -16,12 +17,12 @@ function HomePage(props) {
 
     const [todos, setTodos] = useState([todo]);
 
-    const handleAddTodo = () => {
+    const handleAddTodo = (title,description) => {
 
         const newTodo = {
             _id: Date.now().toString(),
-            title: "Нове завдання",
-            description: "Опис нового завдання",
+            title,
+            description,
             completed: false,
             createdAt: new Date().toISOString(),
             updatedAt: new Date().toISOString()
@@ -32,7 +33,7 @@ function HomePage(props) {
     return (
         <div>
             <Typography>{props.username}</Typography>
-            <Button onClick={handleAddTodo}>Додати завдання</Button>
+            <AddTodo addTodo={handleAddTodo}/>
             {todos.map((item) => {
                 return <TodoItem todo={item} key={item._id} />
             })}
