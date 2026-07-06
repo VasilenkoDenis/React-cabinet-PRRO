@@ -43,6 +43,14 @@ function HomePage(props) {
         setTodos(updatedTodos);
     }
 
+    const handleUpdateTodo = (_id, title, description) => {
+
+        const updatedTodos = todos.map((item) =>{return item._id === _id
+                                                 ? {...item, title, description}
+                                                 : item});
+        setTodos(updatedTodos);
+    }
+
     return (
         <div>
             <Typography>{props.username}</Typography>
@@ -51,7 +59,8 @@ function HomePage(props) {
                 return <TodoItem todo={item} 
                                  key={item._id} 
                                  handleDeleteTodo={handleDeleteTodo}
-                                 handleDoneTodo={handleDoneTodo}/>
+                                 handleDoneTodo={handleDoneTodo}
+                                 handleUpdateTodo={handleUpdateTodo}/>
             })}
         </div>
     );
